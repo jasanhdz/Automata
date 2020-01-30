@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Automata</title>
+</head>
+<body>
+  <div class="Container">
+    <div class="input_center">
+      <div class="input_info">
+        <h1>Autómata</h1>
+        <p>Programa que lee un autómata y revisa si una cadena es aceptada por esté automatá.</p>
+        <p>La especificación del autómata (AFD) estará almacenada en un archivo de texto.</p>
+      </div>
+      <div class="input_container">
+        <textarea id="textarea" autofocus type="text" class="input_container--input"></textarea>
+      </div>
+      <div class="input_buttons">
+        <div class="file_container">
+          <label class="file" for="files"><img src="./assets/file.png" alt="file"></label>
+          <input type="file" id="files" style="visibility:hidden">
+        </div>
+        <button id="run" class="button" type="button">CargarAutómata</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="../index.js"></script>
+</body>
+</html>
