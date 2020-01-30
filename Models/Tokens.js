@@ -1,11 +1,11 @@
-function GetTokens() {
+function Tokens() {
   this.states = []
   this.alphabet = []
   this.initialState = []
   this.finalStates = []
 }
 
-GetTokens.prototype.createTokens = function (str) {
+Tokens.prototype.createTokens = function (str) {
   this.lines = str.value.split("\n");
   for (let i = 0; i < this.lines.length; i++) {
     switch (i) {
@@ -27,7 +27,9 @@ GetTokens.prototype.createTokens = function (str) {
         if (isNumber) {
           this.initialState = parseInt(initialState[2])
         } else {
-          alert(`Esperamos un número en la tercer posición con formato "S = numero" pero ingresaste **${initialState[2]}**`)
+          let msg = `Esperamos un número en la tercer posición con formato "S = numero" pero ingresaste **${initialState[2]}**`;
+          alert(msg);
+          throw new Error(msg)
         }
         break
       case 3:
@@ -36,13 +38,15 @@ GetTokens.prototype.createTokens = function (str) {
         this.verifyNumber(finalStates, this.finalStates)
     }
   }
-  console.log(this.states)
-  console.log(this.alphabet)
-  console.log(this.initialState)
-  console.log(this.finalStates)
+  return {
+    states: this.states,
+    alphabet: this.alphabet,
+    initialState: this.initialState,
+    finalStates: this.finalStates
+  }
 }
 
-GetTokens.prototype.verifyNumber = function (str, array) {
+Tokens.prototype.verifyNumber = function (str, array) {
   for (let i = 0; i < str.length; i++) {
     let isNumber = !isNaN(str[i])
     if (isNumber) {
@@ -51,4 +55,4 @@ GetTokens.prototype.verifyNumber = function (str, array) {
   }
 }
 
-export default GetTokens;
+export default Tokens;
