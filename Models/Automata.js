@@ -46,32 +46,59 @@ Automata.prototype.getTokens = function (str) {
   // arr[4]['a'] = 3
   console.log(array);
   for (let vocal = 0; vocal < this.str.length; vocal++) {
-    if (vocal === 0) {
-      if (array[state][this.str[vocal]] !== undefined) {
-        this.apuntador(state, array, vocal)
-        state += 1
+    if (state === 0) {
+      state = array[state][this.str[vocal]]
+      if (state !== undefined) {
+        if (this.str.length - 1 === vocal) {
+          if (this.finalStates.includes(state)) {
+            swal("Buen trabajo!", `El string ${this.string} es valido por el automata :)`, "success");
+            break
+          } else {
+            al("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
+            break
+          }
+        } else {
+          this.apuntador(state, vocal)
+        }
       } else {
         swal("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
-        throw new Error("string no permitido")
+        break
       }
-    } else {
-      if (array[state][this.str[vocal]] !== undefined) {
+    } 
+    else {
+      if (this.str.length - 1 === vocal) {
         state = array[state][this.str[vocal]]
-        this.apuntador(state, array, vocal)
-      } else if(array[state][this.str[vocal]] === undefined) {
-        swal("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
-        throw new Error("string no permitido")
+        if (state !== undefined) {
+          if (!this.finalStates.includes(state)) {
+            swal("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
+            break
+          } else {
+            swal("Buen trabajo!", `El string ${this.string} es valido por el automata :)`, "success");
+            break
+          }
+        } else {
+          swal("Buen trabajo!", `El string ${this.string} es valido por el automata :)`, "success");
+          break
+        }
+      } else {
+        if (array[state][this.str[vocal]] !== undefined) {
+          state = array[state][this.str[vocal]]
+          this.apuntador(state, vocal)
+        } else {
+          swal("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
+          break
+        }
       }
     }
   } 
   
 }
-Automata.prototype.apuntador = function subir(state, arr, vocal) {
+Automata.prototype.apuntador = function subir(state, vocal) {
     if (this.alphabet.includes(this.str[vocal])) {
       if (this.finalStates.includes(state)) {
         console.log("Aquí debe de salir el progra");
         swal("Buen trabajo!", `El string ${this.string} es valido por el automata :)`, "success");
-        return 
+        throw new Error()
       } 
     } else {
       swal("Lo sentimos", `El string ${this.string} No es valido por el autómata`, "error");
