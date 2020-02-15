@@ -15,6 +15,7 @@ Automata.prototype.getTokens = function(str) {
   this.deltas = data.deltas;
   this.string = window.prompt("Ingrese un cadena de Texto:");
   this.str = this.string.split("");
+  debugger;
   // Q = {0, 1, 2, 3, 4}
   // E = {a, b, c, d}
   // S = 0
@@ -43,13 +44,16 @@ Automata.prototype.getTokens = function(str) {
 
 Automata.prototype.runString = function(array) {
   let state = this.initialState;
+  debugger;
   for (let letter = 0; letter < this.str.length; letter++) {
     state = array[state][this.str[letter]];
     if (state !== undefined) {
-      if (this.finalStates.includes(state)) {
-        success(this.string);
-      } else if (this.str.length - 1 === letter) {
-        fail(this.string);
+      if (this.str.length - 1 === letter) {
+        if (this.finalStates.includes(state)) {
+          success(this.string);
+        } else {
+          fail(this.string);
+        }
       }
     } else {
       fail(this.string);
